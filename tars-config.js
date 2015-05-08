@@ -1,12 +1,40 @@
-var tarsConfig = {
+var _ = require('underscore');
 
+var tarsConfig = {
+      /////////////////////
+    // CUSTOM OPTIONS ////////////////////////////////
+    // YOU CAN CHANGE THIS OPTIONS ALL THE TIME      //
+    //                                               //
+    // You need to restart builder to apply options. //
+    ///////////////////////////////////////////////////
+
+    // TARS-BOWER OPTIONS ////////////////////////////////
+    // name of file to store bower dependencies (could be retrieved with bower list --json)
+    bower_dependencies_path: 'bower_dependencies.json',
+
+    // exclude files from concatination
+    // HINT excluded files will be stored like separate-js
+    bower_exclude_files: [],
+    // folder to contain bower js packages inside static/js
+    bower_js_folder: 'vendor',
+    // folder to contain bower css packages inside static/css
+    bower_css_folder: 'vendor',
+
+
+    ///////////////////////////////////////////////////
+
+
+
+    // amazon s3 options
+    s3_accessKeyId: "<s3_acces_key>",
+    s3_secretAccessKey: "<s3_secret_acces_key>",
+    s3_default_bucket_name: "<bucket_name>",
     /////////////////////
     // MUTABLE OPTIONS ////////////////////////////////
     // YOU CAN CHANGE THIS OPTIONS ALL THE TIME      //
     //                                               //
     // You need to restart builder to apply options. //
     ///////////////////////////////////////////////////
-
     /**
      * Autoprefixer config
      * @type {Array}
@@ -17,7 +45,7 @@ var tarsConfig = {
      * Use svg images
      * @type {Boolean}
      */
-    useSVG: true,
+    useSVG: false,
 
     /**
      * Use linting and hinting of js-files
@@ -80,7 +108,7 @@ var tarsConfig = {
              * @type {String, undefined}
              * For example 'Glass' in OS X
              */
-            onSuccess: undefined
+            onSuccess: 'Glass'
         },
 
         /**
@@ -179,7 +207,7 @@ var tarsConfig = {
      * Build version is a date ot building
      * @type {Boolean}
      */
-    useBuildVersioning: true,
+    useBuildVersioning: false,
 
     /**
      * Use archiver for your build
@@ -207,7 +235,7 @@ var tarsConfig = {
      * Available 'jade' and 'handlebars'
      * @type {String}
      */
-    templater: 'handlebars',
+    templater: 'jade',
 
     /**
      * Css-preprocessor
@@ -265,4 +293,6 @@ var tarsConfig = {
     ////////////////////////////////////////////////////
 };
 
-module.exports = tarsConfig;
+localTarsConfig = require('./local-tars-config');
+
+module.exports = _.extend(tarsConfig, localTarsConfig);
