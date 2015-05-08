@@ -5,6 +5,8 @@
 
 * upload build version to s3
 * custom integration with bower
+TODO:
+* ES6
 
 
 ## upload build version to s3
