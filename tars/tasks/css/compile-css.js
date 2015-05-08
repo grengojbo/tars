@@ -10,6 +10,8 @@ var notify = require('gulp-notify');
 var tarsConfig = require('../../../tars-config');
 var notifier = require('../../helpers/notifier');
 var browserSync = require('browser-sync');
+var _ = require('underscore');
+var TarsBowerDeps = require('../../helpers/tars-bower-deps.js');
 
 var useAutoprefixer = false;
 var helperStream;
@@ -49,6 +51,14 @@ scssFilesToConcatinate.push(
  * @param  {object} buildOptions
  */
 module.exports = function (buildOptions) {
+
+    tars_bower_deps = TarsBowerDeps.getTarsBowerDeps();
+
+    _.each( tars_bower_deps.depsCssFiles(), function( element ){
+        scssFilesToConcatinate.push('./markup/' + tarsConfig.fs.staticFolderName + '/scss/'+tarsConfig.bower_css_folder+'/'+element);
+
+    });
+
 
     var patterns = [];
 
