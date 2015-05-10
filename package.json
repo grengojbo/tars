@@ -44,7 +44,8 @@
     "run-sequence": "1.0.2",
     "through2": "0.6.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+  },
   "scripts": {
     "install": "node ./tars/helpers/install-additional-deps.js"
   },
@@ -59,6 +60,8 @@
   },
   "homepage": "https://github.com/2gis/tars",
   "keywords": [
-    "gulp", "makeup", "markup"
+    "gulp",
+    "makeup",
+    "markup"
   ]
 }
