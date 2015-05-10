@@ -293,6 +293,6 @@ var tarsConfig = {
     ////////////////////////////////////////////////////
 };
 
-localTarsConfig = require('./local-tars-config');
+localTarsConfig = require('./local_tars_config');
 
 module.exports = _.extend(tarsConfig, localTarsConfig);
