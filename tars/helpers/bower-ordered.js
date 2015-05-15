@@ -8,6 +8,7 @@ BowerOrderedDependencies;
 BowerOrderedDependencies = function(package, opts) {
     this.defaults = {
         exclude_files: [],
+        package_files_overrides:{}
         // exclude_deps: [],
     };
     this.options = _.extend( this.defaults, opts );
@@ -24,9 +25,16 @@ BowerOrderedDependencies.prototype = {
             return el.name === dep_name;
         });
 
-        if(!dep_exists){
+        if (!dep_exists){
+            if (_.has(this.options.package_files_overrides, dep_name)) {
+                dependency.pkgMeta.main = this.options.package_files_overrides[dep_name];
+            }
+            if (!!dependency.pkgMeta.main) {
+                var dependency_files = _.flatten(new Array(dependency.pkgMeta.main));
+            }else{
+                var dependency_files = [];
+            }
 
-            var dependency_files = _.flatten(new Array(dependency.pkgMeta.main));
 
             // remove paths from file names
             dependency_files = _.map( dependency_files, function( item ){

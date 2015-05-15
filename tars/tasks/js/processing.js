@@ -6,6 +6,10 @@ var tarsConfig = require('../../../tars-config');
 var notifier = require('../../helpers/notifier');
 var browserSync = require('browser-sync');
 var _ = require('underscore');
+var babel = require("gulp-babel");
+var gulpif = require('gulp-if');
+
+
 
 var TarsBowerDeps = require('../../helpers/tars-bower-deps.js');
 
@@ -59,6 +63,7 @@ module.exports = function(buildOptions) {
     return gulp.task('js:processing', ['js:check'], function() {
         return gulp.src(jsPaths)
             .pipe(concat('main' + buildOptions.hash + '.js'))
+            .pipe(gulpif(tarsConfig.es6_transpile, babel()))
             .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while concating js-files.\nLook in the console for details.\n' + error;
             }))

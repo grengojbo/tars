@@ -12,7 +12,6 @@ var minifycss = require('gulp-minify-css');
 var flatten = require('gulp-flatten');
 var TarsBowerDeps = require('../helpers/tars-bower-deps.js');
 
-TarsBowerDeps.setTarsBowerDeps();
 
 
 

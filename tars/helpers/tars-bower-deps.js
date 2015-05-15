@@ -28,6 +28,7 @@ module.exports = {
     getTarsBowerDeps: function(){
         var opts = {
             exclude_files: tarsConfig.bower_exclude_files,
+            package_files_overrides: tarsConfig.package_files_overrides
         };
 
         try {
@@ -36,7 +37,8 @@ module.exports = {
             return bod;
         }
         catch (e) {
-            console.log('no file with bower ependencies');
+            console.log(e);
+            console.log('no file with bower dependencies');
             var bod = new bowerOrderedDependencies({}, opts);
             return bod;
         }
