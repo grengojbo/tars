@@ -10,6 +10,7 @@
         "requirejs-plugins": "^1.0.2",
         "gulp-bower": "0.0.10",
         "underscore.string": "^3.0.3",
-        "gulp-babel": "^5.1.0"
+        "gulp-babel": "^5.1.0",
+        "gulp-if": "^1.2.5"
     }
 }

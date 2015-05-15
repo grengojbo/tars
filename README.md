@@ -1,25 +1,32 @@
 # tars markup builder with custom features
 [origin repository](https://github.com/2gis/tars)
 
-## features
+## Features
 
 * upload build version to s3
 * custom integration with bower
-TODO:
 * ES6
 
+## TODO:
+* ES6
+    * shims
+* Bower
+    * uninstall package
 
-## upload build version to s3
+
+## Amazon S3
 uploads all files from build directory to amazon s3 bucket
 
 bucket should be configured as static web site hosting
+
+provide AMAZON credentials in local_tars_config.js
 
 
 ```shell
 gulp upload-s3
 ```
 
-## bower integration
+## Bower integration
 
 - init bower
 
@@ -39,7 +46,13 @@ gulp bower-libs
 
 - you can list files that will not be compiled by tars, ignored js files acts like files in separate-js folder
 
+## ES6
+To user es6 transpiler for all js static files set option `es6_transpile: true` (false is set by default)
+you can add shims with bower
+
+
 
 ## HINTS
  - flatten used on fonts
  - all bower packages git ignored
+ - babel transpile for es6
