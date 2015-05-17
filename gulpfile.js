@@ -161,7 +161,7 @@ gulp.task('build-dev', function (cb) {
         [
             'css:compile-css', 'css:compile-css-for-ie8',
             'html:concat-modules-data',
-            'js:move-separate', 'js:processing'
+            'js:move-separate', 'js:processing', 'js:bower-concat'
         ],
         [
             'html:compile-templates',

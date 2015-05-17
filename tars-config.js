@@ -23,12 +23,14 @@ var tarsConfig = {
     // ovverrides for main package files for packages without main
     // example {jquery:{main:['jquery.js']}}
     package_files_overrides: {
-        'harmony-reflect': ['reflect.js']
 
     },
-    
+
     // es 6 options
     es6_transpile: false,
+
+    // transpile separate files
+    es6_separate_transpile: false,
 
     // amazon s3 options
     s3_accessKeyId: "<s3_acces_key>",
@@ -153,7 +155,7 @@ var tarsConfig = {
          * Example: ['google chrome', 'firefox']
          * Avalible: safari, internet explorer, google chrome, firefox, opera
          */
-        browser: 'safari',
+        browser: 'google chrome',
 
         /**
          * Choose the page to open in browser at first opening

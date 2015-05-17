@@ -25,6 +25,7 @@ BowerOrderedDependencies.prototype = {
             return el.name === dep_name;
         });
 
+
         if (!dep_exists){
             if (_.has(this.options.package_files_overrides, dep_name)) {
                 dependency.pkgMeta.main = this.options.package_files_overrides[dep_name];
