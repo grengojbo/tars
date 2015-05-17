@@ -41,7 +41,7 @@ bower init
 
 - install needed packages
 
-- gather bower static files to tars markup, this also creates file with all bower dependecies(output of 'bower list --json' command); Module bower-ordered works with json data with such format, module gathers all dependencies and output files needed in order
+- gather bower static files to tars markup, this also creates file with all bower dependecies(output of `bower list --json` command); Module bower-ordered works with json data with such format, module gathers all dependencies and output files needed in order
 
 ```shell
 gulp bower-libs
