@@ -30,14 +30,9 @@ var TarsBowerDeps = require('../helpers/tars-bower-deps.js');
 var dest_path = './markup/static';
 module.exports = function(buildOptions) {
     var jsFilter = gulpFilter('*.js');
-    var jsFrameworkFilter = gulpFilter(['jquery.js']);
     var cssFilter = gulpFilter('*.css');
     var fontFilter = gulpFilter(['*.eot', '*.woff2', '*.woff', '*.svg', '*.ttf']);
     TarsBowerDeps.setTarsBowerDeps();
-    // console.log(eval('var readyModulesData = {' + fs.readFileSync('./test.json', "utf8") + '}'));
-    // bower_deps = JSON.parse(fs.readFileSync('./bower_deps_order.json', "utf8"));
-
-
 
     return gulp.task('bower-libs', [], function(cb) {
         return gulp.src(mainBowerFiles())

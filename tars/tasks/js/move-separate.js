@@ -3,36 +3,21 @@ var cache = require('gulp-cached');
 var notify = require('gulp-notify');
 var tarsConfig = require('../../../tars-config');
 var notifier = require('../../helpers/notifier');
-var _ = require('underscore');
-var TarsBowerDeps = require('../../helpers/tars-bower-deps.js');
+var babel = require("gulp-babel");
+var gulpif = require('gulp-if');
 
 /**
  * Copy separate Js-files to dev directory
  * @param  {object} buildOptions
  */
+module.exports = function (buildOptions) {
 
-
-
- var jsPaths = [
-        './markup/' + tarsConfig.fs.staticFolderName + '/js/separate-js/**/*.js'
-     ];
-
-
-module.exports = function(buildOptions) {
-
-    tars_bower_deps = TarsBowerDeps.getTarsBowerDeps();
-
-    bower_deps_paths = [];
-
-    _.each( tars_bower_deps.depsJsFiles(true), function( element, index ){
-        bower_deps_paths.push('./markup/' + tarsConfig.fs.staticFolderName + '/js/'+tarsConfig.bower_js_folder+'/'+element);
-
-    });
-
-    jsPaths= _.union(bower_deps_paths,jsPaths);
-
-    return gulp.task('js:move-separate', function(cb) {
-        gulp.src(jsPaths)
+    return gulp.task('js:move-separate', function (cb) {
+        gulp.src('./markup/' + tarsConfig.fs.staticFolderName + '/js/separate-js/**/*.js')
+            .pipe(gulpif(tarsConfig.es6_separate_transpile, babel()))
+            .on('error', notify.onError(function (error) {
+                return '\nAn error occurred while transpiling es6 js-files.\nLook in the console for details.\n' + error;
+            }))
             .pipe(cache('separate-js'))
             .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while moving separate js-files.\'s data.\nLook in the console for details.\n' + error;
