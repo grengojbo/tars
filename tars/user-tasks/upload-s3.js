@@ -31,11 +31,15 @@ var s3 = require('gulp-s3-upload')({
 module.exports = function(buildOptions) {
 
     return gulp.task('upload-s3', /*['required-task-name'],*/ function(cb) {
-        return gulp.src(['./builds/**','!./builds/*.zip'])
+        return gulp.src(['./builds/**'])
             // Do stuff here
             .pipe(s3({
                 Bucket: tarsConfig.s3_default_bucket_name, //  Required
                 ACL: 'public-read' //  Needs to be user-defined
+            }))
+            .on('error', notify.onError(function (error) {
+                console.log(console.error());
+                return '\nAn error occurred while moving separate bower js-files.\'s data.\nLook in the console for details.\n' + error;
             }))
 
             // If you need to reload browser, uncomment the row below
