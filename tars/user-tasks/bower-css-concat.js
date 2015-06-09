@@ -6,11 +6,7 @@ var tarsConfig = require('../../tars-config');
 var notifier = require('../helpers/notifier');
 var browserSync = require('browser-sync');
 var _ = require('underscore');
-
-
-
 var TarsBowerDeps = require('../helpers/tars-bower-deps.js');
-
 
 var cssPaths = [];
 
@@ -18,18 +14,16 @@ var cssPaths = [];
  * Concat JS for modules, libs and plugins in common file. Also lint modules' js
  * @param  {objects} buildOptions
  */
-module.exports = function(buildOptions) {
-    tars_bower_deps = TarsBowerDeps.getTarsBowerDeps();
+module.exports = function (buildOptions) {
+    return gulp.task('css:bower-concat', function () {
+        tars_bower_deps = TarsBowerDeps.getTarsBowerDeps();
+        bower_deps_paths = [];
+        _.each(tars_bower_deps.depsCssFiles(), function (element, index) {
+            bower_deps_paths.push('./markup/' + tarsConfig.fs.staticFolderName + '/scss/' + tarsConfig.bower_css_folder + '/' + element);
 
-    bower_deps_paths = [];
-    _.each( tars_bower_deps.depsCssFiles(), function( element, index ){
-        bower_deps_paths.push('./markup/' + tarsConfig.fs.staticFolderName + '/scss/'+tarsConfig.bower_css_folder+'/'+element);
+        });
 
-    });
-
-    cssPaths= _.union(bower_deps_paths,cssPaths);
-
-    return gulp.task('css:bower-concat', [], function() {
+        cssPaths = _.union(bower_deps_paths, cssPaths);
         return gulp.src(cssPaths)
             .pipe(concat('vendor' + buildOptions.hash + '.css'))
             // .pipe(gulpif(tarsConfig.es6_transpile, babel()))

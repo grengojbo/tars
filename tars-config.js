@@ -1,4 +1,4 @@
-var _ = require('underscore');
+// var _ = require('underscore');
 
 var tarsConfig = {
       /////////////////////
@@ -300,6 +300,16 @@ var tarsConfig = {
     ////////////////////////////////////////////////////
 };
 
-localTarsConfig = require('./local_tars_config');
+// localTarsConfig = require('./local_tars_config');
 
-module.exports = _.extend(tarsConfig, localTarsConfig);
+// try {
+//     statements
+// } catch (variable) {
+//     statements
+// } finally {
+//     statements
+// }
+
+// module.exports = _.extend(tarsConfig, localTarsConfig);
+
+module.exports = tarsConfig

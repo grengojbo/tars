@@ -7,30 +7,27 @@ var notifier = require('../helpers/notifier');
 var browserSync = require('browser-sync');
 var _ = require('underscore');
 
-
-
 var TarsBowerDeps = require('../helpers/tars-bower-deps.js');
-
-
-var jsPaths = [];
 
 /**
  * Concat JS for modules, libs and plugins in common file. Also lint modules' js
  * @param  {objects} buildOptions
  */
-module.exports = function(buildOptions) {
-    tars_bower_deps = TarsBowerDeps.getTarsBowerDeps();
+module.exports = function (buildOptions) {
 
-    bower_deps_paths = [];
+    return gulp.task('js:bower-concat', ['js:bower-separate'], function () {
+        var jsPaths = [];
+        tars_bower_deps = TarsBowerDeps.getTarsBowerDeps();
 
-    _.each( tars_bower_deps.depsJsFiles(), function( element, index ){
-        bower_deps_paths.push('./markup/' + tarsConfig.fs.staticFolderName + '/js/'+tarsConfig.bower_js_folder+'/'+element);
+        bower_deps_paths = [];
 
-    });
+        _.each(tars_bower_deps.depsJsFiles(), function (element, index) {
+            bower_deps_paths.push('./markup/' + tarsConfig.fs.staticFolderName + '/js/' + tarsConfig.bower_js_folder + '/' + element);
 
-    jsPaths= _.union(bower_deps_paths,jsPaths);
+        });
 
-    return gulp.task('js:bower-concat', ['js:bower-separate'], function() {
+        jsPaths = _.union(bower_deps_paths, jsPaths);
+
         return gulp.src(jsPaths)
             .pipe(concat('vendor' + buildOptions.hash + '.js'))
             // .pipe(gulpif(tarsConfig.es6_transpile, babel()))
@@ -38,7 +35,7 @@ module.exports = function(buildOptions) {
                 return '\nAn error occurred while concating bower js-files.\nLook in the console for details.\n' + error;
             }))
             .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/js'))
-            .pipe(browserSync.reload({stream:true}))
+            .pipe(browserSync.reload({ stream: true }))
             .pipe(
                 notifier('Bower JS\'ve been concatinated')
             );

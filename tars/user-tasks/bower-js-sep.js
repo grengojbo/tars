@@ -11,25 +11,24 @@ var TarsBowerDeps = require('../helpers/tars-bower-deps.js');
  * @param  {object} buildOptions
  */
 
+var jsPaths = [];
 
- var jsPaths = []
+module.exports = function (buildOptions) {
 
+    return gulp.task('js:bower-separate', function (cb) {
 
-module.exports = function(buildOptions) {
+        tars_bower_deps = TarsBowerDeps.getTarsBowerDeps();
 
-    tars_bower_deps = TarsBowerDeps.getTarsBowerDeps();
+        bower_deps_paths = [];
 
-    bower_deps_paths = [];
+        _.each(tars_bower_deps.depsJsFiles(true), function (element, index) {
+            bower_deps_paths.push('./markup/' + tarsConfig.fs.staticFolderName + '/js/' + tarsConfig.bower_js_folder + '/' + element);
 
-    _.each( tars_bower_deps.depsJsFiles(true), function( element, index ){
-        bower_deps_paths.push('./markup/' + tarsConfig.fs.staticFolderName + '/js/'+tarsConfig.bower_js_folder+'/'+element);
+        });
 
-    });
+        jsPaths = _.union(bower_deps_paths, jsPaths);
 
-    jsPaths= _.union(bower_deps_paths,jsPaths);
-
-    return gulp.task('js:bower-separate', function(cb) {
-        gulp.src(jsPaths)
+        return gulp.src(jsPaths)
             .pipe(cache('separate-js'))
             .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while moving separate bower js-files.\'s data.\nLook in the console for details.\n' + error;

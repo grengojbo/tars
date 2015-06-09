@@ -29,12 +29,14 @@ var TarsBowerDeps = require('../helpers/tars-bower-deps.js');
 
 var dest_path = './markup/static';
 module.exports = function(buildOptions) {
-    var jsFilter = gulpFilter('*.js');
-    var cssFilter = gulpFilter('*.css');
-    var fontFilter = gulpFilter(['*.eot', '*.woff2', '*.woff', '*.svg', '*.ttf']);
-    TarsBowerDeps.setTarsBowerDeps();
+
 
     return gulp.task('bower-libs', [], function(cb) {
+        var jsFilter = gulpFilter('*.js');
+        var cssFilter = gulpFilter('*.css');
+        var fontFilter = gulpFilter(['*.eot', '*.woff2', '*.woff', '*.svg', '*.ttf']);
+        TarsBowerDeps.setTarsBowerDeps();
+
         return gulp.src(mainBowerFiles())
             .on('error', notify.onError(function(error) {
                 return '\nAn error occurred while something.\nLook in the console for details.\n' + error;

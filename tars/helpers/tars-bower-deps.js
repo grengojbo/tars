@@ -1,20 +1,17 @@
 var bower = require('bower');
 var fs = require('fs');
 var tarsConfig = require('../../tars-config');
-var bowerOrderedDependencies = require('../helpers/bower-ordered');
-
-
-
+var BowerOrderedDependencies = require('../helpers/bower-ordered');
 
 module.exports = {
-    setTarsBowerDeps: function() {
+    setTarsBowerDeps: function () {
 
         bower.commands
             .list([], {
                 'offline': true
             }, { /*confs*/ })
-            .on('end', function(output) {
-                fs.writeFile(tarsConfig.bower_dependencies_path, JSON.stringify(output), function(err) {
+            .on('end', function (output) {
+                fs.writeFile(tarsConfig.bower_dependencies_path, JSON.stringify(output), function (err) {
                     if (err) {
                         return console.log(err);
                     }
@@ -25,21 +22,21 @@ module.exports = {
             });
     },
 
-    getTarsBowerDeps: function(){
+    getTarsBowerDeps: function () {
         var opts = {
             exclude_files: tarsConfig.bower_exclude_files,
             package_files_overrides: tarsConfig.package_files_overrides
         };
 
         try {
-            var bowerDepFile = require("../../"+tarsConfig.bower_dependencies_path);
-            var bod = new bowerOrderedDependencies(bowerDepFile, opts);
+            var bowerDepFile = require("../../" + tarsConfig.bower_dependencies_path);
+            var bod = new BowerOrderedDependencies(bowerDepFile, opts);
             return bod;
         }
         catch (e) {
             console.log(e);
             console.log('no file with bower dependencies');
-            var bod = new bowerOrderedDependencies({}, opts);
+            var bod = new BowerOrderedDependencies({}, opts);
             return bod;
         }
     }
