@@ -1,5 +1,3 @@
-// var _ = require('underscore');
-
 var tarsConfig = {
       /////////////////////
     // CUSTOM OPTIONS ////////////////////////////////
@@ -300,16 +298,13 @@ var tarsConfig = {
     ////////////////////////////////////////////////////
 };
 
-// localTarsConfig = require('./local_tars_config');
+try {
+    require('./local_tars_config');
+    var _ = require('underscore');
+    tarsConfig = _.extend(tarsConfig, localTarsConfig);
 
-// try {
-//     statements
-// } catch (variable) {
-//     statements
-// } finally {
-//     statements
-// }
-
-// module.exports = _.extend(tarsConfig, localTarsConfig);
+} catch (variable) {
+    console.log('gulp-configs: no local settings');
+}
 
 module.exports = tarsConfig
