@@ -299,7 +299,7 @@ var tarsConfig = {
 };
 
 try {
-    require('./local_tars_config');
+    var localTarsConfig = require('./local_tars_config');
     var _ = require('underscore');
     tarsConfig = _.extend(tarsConfig, localTarsConfig);
 

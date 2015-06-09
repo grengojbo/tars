@@ -21,10 +21,11 @@ module.exports = function (buildOptions) {
 
         bower_deps_paths = [];
 
-        _.each(tars_bower_deps.depsJsFiles(true), function (element, index) {
+        _.each(tars_bower_deps.depsJsFilesExcluded(), function (element, index) {
             bower_deps_paths.push('./markup/' + tarsConfig.fs.staticFolderName + '/js/' + tarsConfig.bower_js_folder + '/' + element);
 
         });
+        console.log(bower_deps_paths);
 
         jsPaths = _.union(bower_deps_paths, jsPaths);
 
