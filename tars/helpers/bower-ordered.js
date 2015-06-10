@@ -42,11 +42,12 @@ BowerOrderedDependencies.prototype = {
             dependency_files = _.filter(dependency_files, function (el) {
                 return el.indexOf('*') == -1;
             });
-
+            var number_of_deps = _.keys(dependency.pkgMeta.dependencies).length || 0;
             this.deps_list.push({
                 name: dep_name,
                 files: dependency_files,
-                deps_number: _.values(dependency.dependencies).length
+                deps_number: number_of_deps
+                // _.values(dependency.dependencies).length
             });
 
             this.search_deps(dependency.dependencies);
