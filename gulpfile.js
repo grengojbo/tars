@@ -166,8 +166,7 @@ gulp.task('build-dev', function (cb) {
         [
             'css:compile-css', 'css:compile-css-for-ie8',
             'html:concat-modules-data',
-            'js:move-separate', 'js:processing'
-            // , 'js:bower-concat', 'css:bower-concat'
+            'js:move-separate', 'js:processing', 'js:bower-concat', 'css:bower-concat'
         ],
         [
             'html:compile-templates',
@@ -211,8 +210,7 @@ gulp.task('build-static-dev', function (cb) {
         ],
         [
             'css:compile-css', 'css:compile-css-for-ie8',
-            'js:move-separate', 'js:processing'
-            // , 'js:bower-concat', 'css:bower-concat'
+            'js:move-separate', 'js:processing', 'js:bower-concat', 'css:bower-concat'
         ],
         [
             'other:move-misc-files', 'other:move-fonts', 'other:move-assets',
