@@ -6,6 +6,10 @@ var tarsConfig = {
     // You need to restart builder to apply options. //
     ///////////////////////////////////////////////////
 
+    //folder for collect static
+    // USE this to store files in adition to build pass
+    // additionalBuildPath: '../skeleton/skeleton/static/',
+
     // TARS-BOWER OPTIONS ////////////////////////////////
     // name of file to store bower dependencies (could be retrieved with bower list --json)
     bower_dependencies_path: 'bower_dependencies.json',

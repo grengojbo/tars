@@ -14,6 +14,15 @@
     * uninstall package
     * concat css to `vendor.css`
 
+## Common
+Common additional commands and
+
+### commands
+* `collectstatic` - build only static files(all files except *.html)
+
+### arguments
+* `--extrapath` use this argument with gulp commands to extract build files to custom filder configured in `additionalBuildPath` parameter. *Use this atgument only for additional path, to change folder for build fiels just use `buildPath`*
+
 
 ## Amazon S3
 uploads all files from build directory to amazon s3 bucket
