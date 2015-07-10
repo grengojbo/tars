@@ -44,6 +44,7 @@ var tarsConfig = {
     //                                               //
     // You need to restart builder to apply options. //
     ///////////////////////////////////////////////////
+
     /**
      * Autoprefixer config
      * @type {Array}
@@ -54,7 +55,7 @@ var tarsConfig = {
      * Use svg images
      * @type {Boolean}
      */
-    useSVG: false,
+    useSVG: true,
 
     /**
      * Use linting and hinting of js-files
@@ -244,7 +245,7 @@ var tarsConfig = {
      * Available 'jade' and 'handlebars'
      * @type {String}
      */
-    templater: 'jade',
+    templater: 'handlebars',
 
     /**
      * Css-preprocessor
