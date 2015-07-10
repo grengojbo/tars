@@ -29,7 +29,7 @@ var TarsBowerDeps = require('../helpers/tars-bower-deps.js');
 
 
 module.exports = function(buildOptions) {
-    var dest_path = tarsConfig.fs.staticFolderName;
+    var dest_path = './markup/' + tarsConfig.fs.staticFolderName;
     return gulp.task('bower-libs', [], function(cb) {
         var jsFilter = gulpFilter('*.js');
         var cssFilter = gulpFilter('*.css');
