@@ -4,6 +4,8 @@ var notify = require('gulp-notify');
 var tarsConfig = require('../../../tars-config');
 var notifier = require('../../helpers/notifier');
 var browserSync = require('browser-sync');
+var babel = require("gulp-babel");
+var gulpif = require('gulp-if');
 
 var jsPaths = [
         './markup/' + tarsConfig.fs.staticFolderName + '/js/framework/**/*.js',
@@ -37,6 +39,10 @@ module.exports = function (buildOptions) {
 
     return gulp.task('js:processing', ['js:check'], function () {
         return gulp.src(jsPaths)
+            .pipe(gulpif(tarsConfig.es6_transpile, babel()))
+            .on('error', notify.onError(function (error) {
+                return '\nAn error occurred while transpiling es6 js-files.\nLook in the console for details.\n' + error;
+            }))
             .pipe(concat('main' + buildOptions.hash + '.js'))
             .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while concating js-files.\nLook in the console for details.\n' + error;
