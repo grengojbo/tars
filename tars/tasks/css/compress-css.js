@@ -11,7 +11,7 @@ var path = require('path');
  * Compress css-files
  * @param  {object} buildOptions
  */
-module.exports = function (buildOptions) {
+module.exports = function(buildOptions) {
 
     return gulp.task('css:compress-css', function () {
         return gulp.src(path.join(tarsConfig.fs.buildFolderName, tarsConfig.fs.staticFolderName, 'css', '*.css'))
@@ -28,5 +28,5 @@ module.exports = function (buildOptions) {
             .pipe(
                 notifier('Css\'ve been minified')
             );
-    });
+        });
 };

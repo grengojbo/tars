@@ -24,6 +24,6 @@ module.exports = function (buildOptions) {
     }
 
     return gulp.task('service:clean', function (cb) {
-        del(pathsToDel, cb);
+        del(pathsToDel,{force:true} ,cb);
     });
 };

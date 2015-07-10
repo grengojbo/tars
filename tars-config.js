@@ -1,5 +1,43 @@
 var tarsConfig = {
+      /////////////////////
+    // CUSTOM OPTIONS ////////////////////////////////
+    // YOU CAN CHANGE THIS OPTIONS ALL THE TIME      //
+    //                                               //
+    // You need to restart builder to apply options. //
+    ///////////////////////////////////////////////////
 
+    //folder for collect static
+    // USE this to store files in adition to build pass
+    // additionalBuildPath: '../skeleton/skeleton/static/',
+
+    // TARS-BOWER OPTIONS ////////////////////////////////
+    // name of file to store bower dependencies (could be retrieved with bower list --json)
+    bower_dependencies_path: 'bower_dependencies.json',
+
+    // exclude files from concatination
+    // HINT excluded files will be stored like separate-js
+    bower_exclude_files: [],
+    // folder to contain bower js packages inside static/js
+    bower_js_folder: 'vendor',
+    // folder to contain bower css packages inside static/css
+    bower_css_folder: 'vendor',
+
+    // ovverrides for main package files for packages without main
+    // example {jquery:{main:['jquery.js']}}
+    package_files_overrides: {
+
+    },
+
+    // es 6 options
+    es6_transpile: false,
+
+    // transpile separate files
+    es6_separate_transpile: false,
+
+    // amazon s3 options
+    s3_accessKeyId: "<s3_acces_key>",
+    s3_secretAccessKey: "<s3_secret_acces_key>",
+    s3_default_bucket_name: "<bucket_name>",
     /////////////////////
     // MUTABLE OPTIONS ////////////////////////////////
     // YOU CAN CHANGE THIS OPTIONS ALL THE TIME      //
@@ -80,7 +118,7 @@ var tarsConfig = {
              * @type {String, undefined}
              * For example 'Glass' in OS X
              */
-            onSuccess: undefined
+            onSuccess: 'Glass'
         },
 
         /**
@@ -179,7 +217,7 @@ var tarsConfig = {
      * Build version is a date ot building
      * @type {Boolean}
      */
-    useBuildVersioning: true,
+    useBuildVersioning: false,
 
     /**
      * Use archiver for your build
@@ -265,4 +303,13 @@ var tarsConfig = {
     ////////////////////////////////////////////////////
 };
 
-module.exports = tarsConfig;
+try {
+    var localTarsConfig = require('./local_tars_config');
+    var _ = require('underscore');
+    tarsConfig = _.extend(tarsConfig, localTarsConfig);
+
+} catch (variable) {
+    console.log('gulp-configs: no local settings');
+}
+
+module.exports = tarsConfig

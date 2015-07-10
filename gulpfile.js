@@ -5,6 +5,8 @@ var gutil = require('gulp-util');
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
 
+
+
 // Flags
 var useLiveReload = gutil.env.lr || false,
     useTunnelToWeb = gutil.env.tunnel || false,
@@ -50,6 +52,11 @@ if (gutil.env.release) {
 } else {
     buildOptions.hash = '';
 }
+
+if (gutil.env.extrapath){
+    buildOptions.buildPath = tarsConfig.additionalBuildPath;
+}
+
 
 watchOptions = {
     cssPreprocExtension: cssPreprocExtension,
@@ -159,7 +166,7 @@ gulp.task('build-dev', function (cb) {
         [
             'css:compile-css', 'css:compile-css-for-ie8',
             'html:concat-modules-data',
-            'js:move-separate', 'js:processing'
+            'js:move-separate', 'js:processing', 'js:bower-concat', 'css:bower-concat'
         ],
         [
             'html:compile-templates',
@@ -180,9 +187,51 @@ gulp.task('build', function () {
         ],
         'service:pre-build',
         [
-            'js:compress', 'css:compress-css'
+            'js:compress', 'css:compress-css', 'js:bower-compress'
         ],
         'service:zip-build',
+        function () {
+            console.log(gutil.colors.black.bold('\n------------------------------------------------------------'));
+            gutil.log(gutil.colors.green('✔'), gutil.colors.green.bold('Release version have been created successfully!'));
+            console.log(gutil.colors.black.bold('------------------------------------------------------------\n'));
+        }
+    );
+});
+
+
+// Build dev-version static files (without *.html)
+gulp.task('build-static-dev', function (cb) {
+    runSequence(
+        'service:builder-start-screen',
+        'service:clean',
+        ['images:minify-svg', 'images:raster-svg'],
+        [
+            'css:make-sprite-for-svg', 'css:make-fallback-for-svg', 'css:make-sprite'
+        ],
+        [
+            'css:compile-css', 'css:compile-css-for-ie8',
+            'js:move-separate', 'js:processing', 'js:bower-concat', 'css:bower-concat'
+        ],
+        [
+            'other:move-misc-files', 'other:move-fonts', 'other:move-assets',
+            'images:move-content-img', 'images:move-plugins-img', 'images:move-general-img'
+        ],
+        cb
+    );
+});
+
+// Build release version static files (without *.html)
+gulp.task('collectstatic', function () {
+    runSequence(
+        'build-static-dev',
+        [
+            'images:minify-raster-img'
+        ],
+        'service:pre-build',
+        [
+            'js:compress', 'css:compress-css', 'js:bower-compress'
+        ],
+        // 'service:zip-build',
         function () {
             console.log(gutil.colors.black.bold('\n------------------------------------------------------------'));
             gutil.log(gutil.colors.green('✔'), gutil.colors.green.bold('Release version have been created successfully!'));

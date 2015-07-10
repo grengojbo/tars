@@ -3,6 +3,7 @@ var cache = require('gulp-cached');
 var notify = require('gulp-notify');
 var notifier = require('../../helpers/notifier');
 var tarsConfig = require('../../../tars-config');
+var flatten = require('gulp-flatten');
 var browserSync = require('browser-sync');
 
 /**
@@ -17,6 +18,7 @@ module.exports = function (buildOptions) {
             .on('error', notify.onError(function (error) {
                 return '\nAn error occurred while moving fonts.\nLook in the console for details.\n' + error;
             }))
+            .pipe(flatten())
             .pipe(gulp.dest('./dev/' + tarsConfig.fs.staticFolderName + '/fonts'))
             .pipe(browserSync.reload({ stream: true }))
             .pipe(
