@@ -28,6 +28,10 @@ module.exports = function (buildOptions) {
             console.log(gutil.colors.black.bold('• tunnel mode;'));
         }
 
+        if (gutil.env.debug) {
+            console.log(gutil.colors.black.bold('• debug mode;'));
+        }
+
         if (gutil.env.ie8) {
             console.log(gutil.colors.black.bold('• ie8 maintenance;'));
         }
