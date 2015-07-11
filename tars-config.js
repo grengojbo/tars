@@ -1,4 +1,7 @@
+'use strict';
+
 var tarsConfig = {
+
       /////////////////////
     // CUSTOM OPTIONS ////////////////////////////////
     // YOU CAN CHANGE THIS OPTIONS ALL THE TIME      //
@@ -35,9 +38,16 @@ var tarsConfig = {
     es6_separate_transpile: false,
 
     // amazon s3 options
-    s3_accessKeyId: "<s3_acces_key>",
-    s3_secretAccessKey: "<s3_secret_acces_key>",
-    s3_default_bucket_name: "<bucket_name>",
+  s3_accessKeyId: '<s3_acces_key>',
+  s3_secretAccessKey: '<s3_secret_acces_key>',
+  s3_default_bucket_name: '<bucket_name>',
+
+  /**
+   * Use compass CSS FrameWork
+   * @type {Boolean}
+   */
+  useCompass: true,
+
     /////////////////////
     // MUTABLE OPTIONS ////////////////////////////////
     // YOU CAN CHANGE THIS OPTIONS ALL THE TIME      //
@@ -135,6 +145,12 @@ var tarsConfig = {
     browserSyncConfig: {
 
         /**
+     * proxy url
+     * @type {String}
+     */
+    proxy: 'localhost:3000',
+
+    /**
          * dir to serve files from
          * @type {String}
          */
@@ -231,6 +247,36 @@ var tarsConfig = {
      */
     ulimit: 4096,
 
+  /**
+   * Set wait Catberry build.js.
+   * @type {Number}
+   */
+  waitCatberryBuild: 40000,
+
+  /**
+   * Set wait Catberry start server.
+   * @type {Number}
+   */
+  waitCatberryServer: 12000,
+
+  catberry: {
+    // exclude: 'articles,elements/error-message,elements/photoswipe',
+    exclude: false,
+    dev: {
+      levelsServer: 'error,warn',
+      levelsBrowser: 'error,warn'
+    },
+    prod: {
+      levelsServer: 'error,warn',
+      levelsBrowser: 'error,warn'
+    },
+    oldIE: false,
+    enableCssStructureMinimization: true,
+    destinationComponentsDir: 'assets',
+    cdnPath: '/assets/',
+    componentJSON: 'cat-component.json'
+  },
+
     //////////////////////////////////////////////
     //////////////////////////////////////////////
 
@@ -296,7 +342,70 @@ var tarsConfig = {
          * 'img' by default
          * @type {String}
          */
-        imagesFolderName: 'img'
+        imagesFolderName: 'images',
+
+    /**
+     * Name of folder with public
+     * 'public' by default
+     * @type {String}
+     */
+    distFolderName: 'public',
+
+    /**
+     * Name of folder with build
+     * 'build' by default
+     * @type {String}
+     */
+    buildFolderName: 'build',
+
+    /**
+     * Name of folder with assets files, such *.css, *.js and so on
+     * 'assets' by default
+     * @type {String}
+     */
+    assetsFolderName: 'assets',
+
+    /**
+     * Name of folder with component
+     * 'modules' by default
+     * @type {String}
+     */
+    componentFolderName: 'catberry_components',
+
+    /**
+     * Name of folder with src
+     * 'src' by default
+     * @type {String}
+    **/
+    srcFolderName: 'src',
+
+    /**
+     * Name of folder with dev
+     * 'dev' by default
+     * @type {String}
+     */
+    devFolderName: 'build',
+
+    /**
+     * Name of folder with config
+     * 'config' by default
+     * @type {String}
+     */
+    configFolderName: 'config',
+
+    /**
+     * Name of folder with templates
+     * 'templates' by default
+     * @type {String}
+     */
+    templatesFolderName: 'templates',
+
+    /**
+     * Name of folder with tmp
+     * 'tmp' by default
+     * @type {String}
+     */
+    tmpFolderName: 'tmp'
     }
 
     ////////////////////////////////////////////////////
